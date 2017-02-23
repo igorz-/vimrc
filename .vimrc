@@ -2,10 +2,12 @@ set number
 syntax enable
 set ts=4
 set autoindent
+set smartindent
 set expandtab
 set shiftwidth=4
 set cursorline
 set showmatch
+set colorcolumn=120
 
 set background=dark
 colorscheme solarized
@@ -25,3 +27,6 @@ Plug 'vim-airline/vim-airline-themes'
 
 " Initialize plugin system
 call plug#end()
+
+let g:airline_theme='luna'
+
