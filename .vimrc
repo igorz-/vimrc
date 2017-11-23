@@ -82,3 +82,4 @@ endif
 
 set wildignore+=*/.git/*,*/tmp/*,*.swp
 
+set noshowmatch
