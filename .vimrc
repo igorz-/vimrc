@@ -9,7 +9,7 @@ set cursorline
 set showmatch
 set colorcolumn=120
 
-map <F2> :NERDTreeTabsToggle<CR>
+map <leader>t :NERDTreeToggle<CR>
 nmap <F8> :TagbarToggle<CR>
 map <C-S-r> :NERDTreeFind<CR>
 nnoremap <silent> <A-Left> :execute 'silent! tabmove ' . (tabpagenr()-2)<CR>
@@ -35,22 +35,25 @@ Plug 'bling/vim-airline'
 Plug 'majutsushi/tagbar'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'ervandew/supertab'
-Plug 'jistr/vim-nerdtree-tabs'
+"Plug 'jistr/vim-nerdtree-tabs'
 Plug 'maksimr/vim-yate'
-Plug 'fholgado/minibufexpl.vim'
+"Plug 'fholgado/minibufexpl.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'tpope/vim-fugitive'
 "Plug 'marijnh/tern_for_vim'
 Plug 'townk/vim-autoclose'
 Plug 'nightsense/seabird'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'elmcast/elm-vim'
+"Plug 'elmcast/elm-vim'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'scrooloose/syntastic'
+"Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-surround'
 Plug 'jdkanani/vim-material-theme'
 Plug 'heavenshell/vim-jsdoc'
 Plug 'nlknguyen/papercolor-theme'
+"Plug 'flowtype/vim-flow'
+Plug 'mxw/vim-jsx'
+Plug 'w0rp/ale'
 
 " Initialize plugin system
 call plug#end()
@@ -83,3 +86,30 @@ endif
 set wildignore+=*/.git/*,*/tmp/*,*.swp
 
 set noshowmatch
+
+let g:javascript_plugin_flow = 1
+let g:jsx_ext_required = 0
+
+"let g:airline#extensions#tabline#formatter = 'unique_tail'
+let g:airline#extensions#tabline#formatter = 'unique_tail_improved'
+let g:airline#extensions#tabline#fnamemod = ':p:.'
+let g:airline#extensions#tabline#fnamecollapse = 1
+let g:airline#extensions#tabline#enabled = 1
+
+" ALE
+let g:ale_linters = {
+\  'javascript': ['flow', 'eslint'],
+\}
+
+highlight clear ALEErrorSign " otherwise uses error bg color (typically red)
+highlight clear ALEWarningSign " otherwise uses error bg color (typically red)
+let g:ale_sign_error = 'X' " could use emoji
+let g:ale_sign_warning = '?' " could use emoji
+let g:ale_statusline_format = ['X %d', '? %d', '']
+" %linter% is the name of the linter that provided the message
+" %s is the error or warning message
+let g:ale_echo_msg_format = '%linter% says %s'
+" Map keys to navigate between lines with errors and warnings.
+nnoremap <leader>an :ALENextWrap<cr>
+nnoremap <leader>ap :ALEPreviousWrap<cr>
+
